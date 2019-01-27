@@ -1,11 +1,8 @@
-import React from 'react'
+import React, { Component } from "react";
+import "./App.css";
 
-const App = () => { 
-    return ( 
-        <div>
-            hello
-        </div>
-    )
+export default class App extends Component {
+  render() {
+    return <React.Fragment>Hello from app</React.Fragment>;
+  }
 }
-
-export default App; 
