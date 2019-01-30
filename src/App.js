@@ -36,7 +36,7 @@ export default class App extends Component {
     // console.log(this.state.recipes);
     return (
 
-      <React.Fragment>
+      <React.Fragment> 
         {/* <RecipeList recipes={this.state.recipes} /> */}
         <RecipeDetails id={this.state.details_id} />
       </React.Fragment>
