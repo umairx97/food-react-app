@@ -12,33 +12,46 @@ export default class App extends Component {
     recipes: recipes,
     url:
       "https://www.food2fork.com/api/search?key=0b7aec6da8c42b47bfee9f7ed32b2f91",
-    details_id: 35384
+    details_id: 35384, 
+    pageIndex: 1
   };
 
-  // async getRecipes() {
-  //   try {
-  //     const data = await fetch(this.state.url);
-  //     const jsonData = await data.json();
+  async getRecipes() {
+    try {
+      const data = await fetch(this.state.url);
+      const jsonData = await data.json();
 
-  //     this.setState({
-  //         recipes: jsonData.recipes
-  //     })
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+      this.setState({
+          recipes: jsonData.recipes
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-  // componentDidMount() {
-  //   this.getRecipes();
-  // }
+  componentDidMount() {
+    this.getRecipes();
+  }
+
+  displayPage = index => {
+    switch (index) {
+      case 1:
+        return <RecipeList recipes={this.state.recipes} />;
+
+      case 0:
+        return <RecipeDetails id={this.state.details_id} />;
+
+      default:
+        return null;
+    }
+  };
 
   render() {
     // console.log(this.state.recipes);
-    return (
-      <React.Fragment>
-        {/* <RecipeList recipes={this.state.recipes} /> */}
-        <RecipeDetails id={this.state.details_id} />
-      </React.Fragment>
-    );
+    return <React.Fragment>
+      {
+        this.displayPage(this.state.pageIndex)
+      }
+    </React.Fragment>;
   }
 }
