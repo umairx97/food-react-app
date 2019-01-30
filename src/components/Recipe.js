@@ -9,6 +9,7 @@ export default class Recipe extends Component {
       publisher,
       recipe_id
     } = this.props.recipe;
+
     const { handleDetails } = this.props;
     return (
       <div className="col-10 mx-auto col-md-4 col-lg-4 my-3">
