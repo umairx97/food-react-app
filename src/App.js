@@ -12,10 +12,12 @@ export default class App extends Component {
     recipes: recipes,
     url:
       "https://www.food2fork.com/api/search?key=0b7aec6da8c42b47bfee9f7ed32b2f91",
+    base_url:
+      "https://www.food2fork.com/api/search?key=0b7aec6da8c42b47bfee9f7ed32b2f91",
     details_id: 35384,
-    pageIndex: 1, 
-    search: ''
-    
+    pageIndex: 1,
+    search: "",
+    query: "&q="
   };
 
   async getRecipes() {
@@ -40,11 +42,11 @@ export default class App extends Component {
       case 1:
         return (
           <RecipeList
-            value = {this.state.search}
+            value={this.state.search}
             recipes={this.state.recipes}
             handleDetails={this.handleDetails}
-            handleChange = {this.handleChange}
-            handleSubmit = {this.handleSubmit}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
           />
         );
 
@@ -74,15 +76,25 @@ export default class App extends Component {
     });
   };
 
-  handleChange = event => { 
-    console.log('hello from  handle change ')
-    
-  }
+  handleChange = event => {
+    this.setState({
+      search: event.target.value
+    });
+  };
 
-  handleSubmit = (event) => { 
-    event.preventDefault(); 
-    console.log('hello from handle submit ')
-  }
+  handleSubmit = event => {
+    event.preventDefault();
+
+    const { base_url, query, search } = this.state;
+
+    this.setState(() => {
+      return {
+        url: `${base_url}${query}${search}`, search: ''
+      };
+    }, () => { 
+      this.getRecipes();
+    });
+  };
   render() {
     // console.log(this.state.recipes);
     return (
