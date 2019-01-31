@@ -21,7 +21,6 @@ export default class RecipeSearch extends Component {
 
                 <div className="input-group">
                   <input
-                    className="input-group"
                     type="text"
                     name="search"
                     placeholder="Chicken, Onions, Carrots"

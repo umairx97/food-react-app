@@ -17,7 +17,8 @@ export default class App extends Component {
     details_id: 35384,
     pageIndex: 1,
     search: "",
-    query: "&q="
+    query: "&q=",
+    error: ""
   };
 
   async getRecipes() {
@@ -25,9 +26,19 @@ export default class App extends Component {
       const data = await fetch(this.state.url);
       const jsonData = await data.json();
 
-      this.setState({
-          recipes: jsonData.recipes
-      })
+      if (jsonData.recipes.length === 0) {
+        this.setState(() => { 
+          return { 
+            error: 'Sorry your search did not return any results'
+          }
+        })
+      } else {
+        this.setState(() => {
+          return {
+            recipes: jsonData.recipes
+          };
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -47,6 +58,7 @@ export default class App extends Component {
             handleDetails={this.handleDetails}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
+            error = {this.state.error}
           />
         );
 
@@ -87,13 +99,17 @@ export default class App extends Component {
 
     const { base_url, query, search } = this.state;
 
-    this.setState(() => {
-      return {
-        url: `${base_url}${query}${search}`, search: ''
-      };
-    }, () => { 
-      this.getRecipes();
-    });
+    this.setState(
+      () => {
+        return {
+          url: `${base_url}${query}${search}`,
+          search: ""
+        };
+      },
+      () => {
+        this.getRecipes();
+      }
+    );
   };
   render() {
     // console.log(this.state.recipes);
