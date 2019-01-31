@@ -27,11 +27,11 @@ export default class App extends Component {
       const jsonData = await data.json();
 
       if (jsonData.recipes.length === 0) {
-        this.setState(() => { 
-          return { 
-            error: 'Sorry your search did not return any results'
-          }
-        })
+        this.setState(() => {
+          return {
+            error: "Sorry your search did not return any results"
+          };
+        });
       } else {
         this.setState(() => {
           return {
@@ -58,7 +58,7 @@ export default class App extends Component {
             handleDetails={this.handleDetails}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
-            error = {this.state.error}
+            error={this.state.error}
           />
         );
 

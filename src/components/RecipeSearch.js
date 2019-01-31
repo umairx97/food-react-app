@@ -13,6 +13,7 @@ export default class RecipeSearch extends Component {
                 Search For Recipes with{" "}
                 <strong className="text-danger">Food2Fork</strong>
               </h1>
+              <h5>Made by Umair Ahmed Bajwa</h5>
 
               <form className="mt-4" onSubmit={handleSubmit}>
                 <label htmlFor="search" className="text-capitalize">
